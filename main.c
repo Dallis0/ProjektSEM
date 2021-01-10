@@ -98,50 +98,6 @@ void wypisz(Pole *P){
 }
 
 
-
-/*Mapa *stworz(const char const * dane){
-    Mapa *m;
-    m = (Mapa*) malloc(sizeof(Mapa));
-    m->kierunek = (char*) malloc(sizeof(char));
-    printf("lol\n");
-
-    for(int i=0;i<99;i++)
-    {   
-        //m->pole
-        for(int j=0;j<99;j++)
-            m->pole[i][j] = '0';
-    }
-
-    int statuskodu = 0;
-
-    cJSON *dane_cjson = cJSON_Parse(dane);
-    if (dane_cjson == NULL)
-    {
-        const char *error_ptr = cJSON_GetErrorPtr();
-        if (error_ptr != NULL)
-        {
-            fprintf(stderr, "Error before: %s\n", error_ptr);
-        }
-        statuskodu = 0;
-        // goto end;
-    }
-
-    printf("lol\n");
-    /*cJSON *x = cJSON_GetObjectItemCaseSensitive(dane_cjson, "current_x");
-    printf("lol%d\n", x->valueint);
-    m->zajety_x = x->valueint;
-    printf("lol\n");
-    cJSON *y = cJSON_GetObjectItemCaseSensitive(dane_cjson, "current_y");
-    m->zajety_y = y->valueint;
-    printf("lol\n");*/
-    /*cJSON *kier = cJSON_GetObjectItemCaseSensitive(dane_cjson, "direction");
-    m->kierunek = kier->valuestring;
-    
-    
-
-    return m;
-}*/
-
 Mapa * wczytaj_json(Mapa *M, const char *const dane){
     Mapa *nowa;
     const cJSON *lol = NULL;
@@ -216,14 +172,7 @@ Mapa_explore *wczytaj_json_explore(Mapa_explore *M, const char *const dane){
         cJSON *y = cJSON_GetObjectItemCaseSensitive(lol, "y");
         cJSON *type = cJSON_GetObjectItemCaseSensitive(lol, "type");
 
-        
-        //printf("Payload:x%d: %d\n",i,x->valueint);
-        //printf("Payload:y%d: %d\n",i,y->valueint);
-        //printf("Payload:Typ pola%d: %s\n",i,type->valuestring);
-
-        //a->x[i] = malloc(sizeof(int));
         nowa->x[i]=x->valueint;
-        //a->y[i] = malloc(sizeof(int));
         nowa->y[i]=y->valueint;
         nowa->type[i] = (char*) malloc(sizeof(char) * strlen((type->valuestring) + 1));
         strcpy(nowa->type[i], type->valuestring);
@@ -232,16 +181,6 @@ Mapa_explore *wczytaj_json_explore(Mapa_explore *M, const char *const dane){
     return nowa;
 }
 
-/*void wypisz_mape(Mapa *M){
-    Mapa *Map = M;
-    for(int i=50;i<70;i++){
-        for(int j = 50;j<70;j++)
-            printf("%c   ", Map->pole[i][j]);
-    printf("\n");
-    }
-    printf("\n");
-
-}*/
 
 char * make_request(char *url){
     CURL *curl;
